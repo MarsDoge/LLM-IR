@@ -1,0 +1,36 @@
+{
+  "schema": "llm-ir.v0",
+  "source": {
+    "text": "I respectfully disagree with the proposal because it underestimates the operational cost.",
+    "language": "en-US",
+    "domain": "workplace",
+    "medium": "comment"
+  },
+  "intent": "disagree",
+  "meaning": {
+    "summary": "The speaker disagrees with a proposal due to underestimated operational cost.",
+    "claims": ["The proposal underestimates operational cost."]
+  },
+  "affect": {
+    "emotion": ["concern"],
+    "intensity": 0.35
+  },
+  "style": {
+    "register": "professional",
+    "tone": "respectful",
+    "formality": 0.75
+  },
+  "privacy": {
+    "source_language_markers": [],
+    "sensitive_markers": [],
+    "recommended_transform": "preserve_author_style"
+  },
+  "targets": [
+    {
+      "language": "zh-CN",
+      "audience": "professional readers",
+      "style": "concise business Chinese",
+      "preserve_source_markers": true
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://llm-ir.org/schema/llm-ir.v0.schema.json",
+  "title": "LLM-IR v0",
+  "description": "A minimal intermediate representation for multilingual, privacy-aware human communication.",
+  "type": "object",
+  "required": ["schema", "source", "intent", "meaning"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "llm-ir.v0"
+    },
+    "source": {
+      "type": "object",
+      "required": ["text"],
+      "additionalProperties": false,
+      "properties": {
+        "text": { "type": "string" },
+        "language": { "type": "string" },
+        "domain": { "type": "string" },
+        "medium": { "type": "string" }
+      }
+    },
+    "intent": {
+      "type": "string",
+      "description": "The primary communicative act, such as inform, ask, persuade, joke, react, apologize, or express_reaction."
+    },
+    "meaning": {
+      "type": "object",
+      "required": ["summary"],
+      "additionalProperties": false,
+      "properties": {
+        "summary": { "type": "string" },
+        "claims": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "open_questions": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "affect": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "emotion": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "intensity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "style": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "register": { "type": "string" },
+        "tone": { "type": "string" },
+        "formality": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "rhetorical_devices": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "culture": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "idioms": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "references": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "localization_notes": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source_language_markers": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "sensitive_markers": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "recommended_transform": {
+          "type": "string"
+        }
+      }
+    },
+    "targets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["language"],
+        "additionalProperties": false,
+        "properties": {
+          "language": { "type": "string" },
+          "audience": { "type": "string" },
+          "style": { "type": "string" },
+          "preserve_source_markers": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}

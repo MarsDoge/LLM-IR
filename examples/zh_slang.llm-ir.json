@@ -1,0 +1,41 @@
+{
+  "schema": "llm-ir.v0",
+  "source": {
+    "text": "这事儿也太离谱了吧，真绷不住了。",
+    "language": "zh-CN",
+    "domain": "social",
+    "medium": "short_post"
+  },
+  "intent": "express_reaction",
+  "meaning": {
+    "summary": "The speaker strongly feels that the situation is absurd."
+  },
+  "affect": {
+    "emotion": ["disbelief", "frustration"],
+    "intensity": 0.85
+  },
+  "style": {
+    "register": "casual",
+    "tone": "internet_slang",
+    "formality": 0.15,
+    "rhetorical_devices": ["hyperbole"]
+  },
+  "culture": {
+    "idioms": ["绷不住了"],
+    "references": [],
+    "localization_notes": ["Avoid literal translation of Chinese internet slang."]
+  },
+  "privacy": {
+    "source_language_markers": ["Chinese internet slang", "regional colloquial phrasing"],
+    "sensitive_markers": [],
+    "recommended_transform": "neutralize_source_language_markers"
+  },
+  "targets": [
+    {
+      "language": "en-US",
+      "audience": "general social media readers",
+      "style": "natural casual expression",
+      "preserve_source_markers": false
+    }
+  ]
+}
