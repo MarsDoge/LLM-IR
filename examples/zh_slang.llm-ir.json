@@ -6,35 +6,134 @@
     "domain": "social",
     "medium": "short_post"
   },
-  "intent": "express_reaction",
+  "intent": {
+    "id": "act:express_reaction",
+    "glosses": {
+      "zh-CN": "表达强烈反应",
+      "en-US": "express a strong reaction"
+    }
+  },
   "meaning": {
-    "summary": "The speaker strongly feels that the situation is absurd."
+    "frames": [
+      {
+        "id": "m1",
+        "type": "evaluation",
+        "predicate": {
+          "id": "eval:absurd",
+          "glosses": {
+            "zh-CN": "离谱/荒谬",
+            "en-US": "absurd"
+          }
+        },
+        "polarity": "negative",
+        "intensity": 0.85,
+        "glosses": {
+          "zh-CN": "说话者强烈觉得这件事很离谱。",
+          "en-US": "The speaker strongly feels that the situation is absurd."
+        }
+      }
+    ],
+    "glosses": {
+      "zh-CN": "说话者强烈觉得这件事很离谱。",
+      "en-US": "The speaker strongly feels that the situation is absurd."
+    }
   },
   "affect": {
-    "emotion": ["disbelief", "frustration"],
+    "labels": [
+      {
+        "id": "affect:disbelief",
+        "glosses": {
+          "zh-CN": "难以置信",
+          "en-US": "disbelief"
+        }
+      },
+      {
+        "id": "affect:frustration",
+        "glosses": {
+          "zh-CN": "无语/受不了",
+          "en-US": "frustration"
+        }
+      }
+    ],
     "intensity": 0.85
   },
   "style": {
-    "register": "casual",
-    "tone": "internet_slang",
+    "register": {
+      "id": "register:casual",
+      "glosses": {
+        "zh-CN": "口语",
+        "en-US": "casual"
+      }
+    },
+    "tone": {
+      "id": "tone:internet_slang",
+      "glosses": {
+        "zh-CN": "网络语气",
+        "en-US": "internet slang"
+      }
+    },
     "formality": 0.15,
-    "rhetorical_devices": ["hyperbole"]
+    "rhetorical_devices": [
+      {
+        "id": "rhetoric:hyperbole",
+        "glosses": {
+          "zh-CN": "夸张",
+          "en-US": "hyperbole"
+        }
+      }
+    ]
   },
   "culture": {
-    "idioms": ["绷不住了"],
+    "idioms": [
+      {
+        "id": "idiom:zh-CN:bengbuzhule",
+        "evidence": "绷不住了",
+        "glosses": {
+          "zh-CN": "绷不住了",
+          "en-US": "cannot keep composure"
+        }
+      }
+    ],
     "references": [],
-    "localization_notes": ["Avoid literal translation of Chinese internet slang."]
+    "localization_notes": {
+      "zh-CN": "不要按字面翻译中文网络语。",
+      "en-US": "Avoid literal translation of Chinese internet slang."
+    }
   },
   "privacy": {
-    "source_language_markers": ["Chinese internet slang", "regional colloquial phrasing"],
+    "source_language_markers": [
+      {
+        "id": "marker:source_language:zh_internet_slang",
+        "evidence": "离谱/绷不住了",
+        "glosses": {
+          "zh-CN": "中文网络语痕迹",
+          "en-US": "Chinese internet slang marker"
+        }
+      }
+    ],
     "sensitive_markers": [],
-    "recommended_transform": "neutralize_source_language_markers"
+    "recommended_transform": {
+      "id": "transform:neutralize_source_language_markers",
+      "glosses": {
+        "zh-CN": "弱化源语言痕迹",
+        "en-US": "neutralize source-language markers"
+      }
+    }
   },
   "targets": [
     {
       "language": "en-US",
-      "audience": "general social media readers",
-      "style": "natural casual expression",
+      "audience": {
+        "zh-CN": "普通社交媒体读者",
+        "en-US": "general social media readers"
+      },
+      "style": {
+        "id": "style:natural_casual",
+        "glosses": {
+          "zh-CN": "自然口语表达",
+          "en-US": "natural casual expression"
+        }
+      },
       "preserve_source_markers": false
     }
   ]

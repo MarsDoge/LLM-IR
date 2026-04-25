@@ -6,6 +6,47 @@
   "type": "object",
   "required": ["schema", "source", "intent", "meaning"],
   "additionalProperties": false,
+  "$defs": {
+    "localizedText": {
+      "type": "object",
+      "description": "Language-tagged text. Keys should be BCP 47 language tags or 'und' for undetermined.",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "concept": {
+      "type": "object",
+      "required": ["id"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A stable language-neutral concept identifier, such as affect:frustration."
+        },
+        "glosses": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "marker": {
+      "type": "object",
+      "required": ["id"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "evidence": { "type": "string" },
+        "glosses": {
+          "$ref": "#/$defs/localizedText"
+        }
+      }
+    }
+  },
   "properties": {
     "schema": {
       "const": "llm-ir.v0"
@@ -22,26 +63,60 @@
       }
     },
     "intent": {
-      "type": "string",
-      "description": "The primary communicative act, such as inform, ask, persuade, joke, react, apologize, or express_reaction."
+      "$ref": "#/$defs/concept",
+      "description": "The primary communicative act as a language-neutral concept."
     },
     "meaning": {
       "type": "object",
-      "required": ["summary"],
+      "required": ["frames"],
       "additionalProperties": false,
       "properties": {
-        "summary": { "type": "string" },
-        "claims": {
+        "frames": {
           "type": "array",
-          "items": { "type": "string" }
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["id", "type", "predicate"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "type": "string" },
+              "type": {
+                "type": "string",
+                "description": "A coarse frame type, such as evaluation, claim, request, event, relation, or stance."
+              },
+              "predicate": {
+                "$ref": "#/$defs/concept"
+              },
+              "arguments": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/$defs/concept"
+                }
+              },
+              "polarity": {
+                "type": "string",
+                "enum": ["positive", "negative", "neutral", "mixed", "unknown"]
+              },
+              "intensity": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "glosses": {
+                "$ref": "#/$defs/localizedText"
+              }
+            }
+          }
         },
-        "assumptions": {
-          "type": "array",
-          "items": { "type": "string" }
+        "glosses": {
+          "$ref": "#/$defs/localizedText",
+          "description": "Human-readable summaries for debugging and display. No language is canonical."
         },
         "open_questions": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "$ref": "#/$defs/concept"
+          }
         }
       }
     },
@@ -49,9 +124,11 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "emotion": {
+        "labels": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "$ref": "#/$defs/concept"
+          }
         },
         "intensity": {
           "type": "number",
@@ -64,8 +141,12 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "register": { "type": "string" },
-        "tone": { "type": "string" },
+        "register": {
+          "$ref": "#/$defs/concept"
+        },
+        "tone": {
+          "$ref": "#/$defs/concept"
+        },
         "formality": {
           "type": "number",
           "minimum": 0,
@@ -73,7 +154,9 @@
         },
         "rhetorical_devices": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "$ref": "#/$defs/concept"
+          }
         }
       }
     },
@@ -83,15 +166,18 @@
       "properties": {
         "idioms": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "$ref": "#/$defs/marker"
+          }
         },
         "references": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "$ref": "#/$defs/marker"
+          }
         },
         "localization_notes": {
-          "type": "array",
-          "items": { "type": "string" }
+          "$ref": "#/$defs/localizedText"
         }
       }
     },
@@ -101,14 +187,18 @@
       "properties": {
         "source_language_markers": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "$ref": "#/$defs/marker"
+          }
         },
         "sensitive_markers": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "$ref": "#/$defs/marker"
+          }
         },
         "recommended_transform": {
-          "type": "string"
+          "$ref": "#/$defs/concept"
         }
       }
     },
@@ -120,8 +210,12 @@
         "additionalProperties": false,
         "properties": {
           "language": { "type": "string" },
-          "audience": { "type": "string" },
-          "style": { "type": "string" },
+          "audience": {
+            "$ref": "#/$defs/localizedText"
+          },
+          "style": {
+            "$ref": "#/$defs/concept"
+          },
           "preserve_source_markers": { "type": "boolean" }
         }
       }

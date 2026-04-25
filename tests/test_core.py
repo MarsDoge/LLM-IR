@@ -6,8 +6,9 @@ def test_encode_chinese_slang_creates_reaction_ir():
 
     assert document["schema"] == "llm-ir.v0"
     assert document["source"]["language"] == "zh-CN"
-    assert document["intent"] == "express_reaction"
-    assert "Chinese internet slang" in document["privacy"]["source_language_markers"]
+    assert document["intent"]["id"] == "act:express_reaction"
+    assert document["meaning"]["glosses"]["zh-CN"] == "说话者强烈觉得这件事很离谱。"
+    assert document["privacy"]["source_language_markers"][0]["id"] == "marker:source_language:zh_internet_slang"
 
 
 def test_decode_chinese_slang_to_natural_english():

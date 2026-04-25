@@ -6,30 +6,108 @@
     "domain": "workplace",
     "medium": "comment"
   },
-  "intent": "disagree",
+  "intent": {
+    "id": "act:disagree",
+    "glosses": {
+      "zh-CN": "表达不同意",
+      "en-US": "disagree"
+    }
+  },
   "meaning": {
-    "summary": "The speaker disagrees with a proposal due to underestimated operational cost.",
-    "claims": ["The proposal underestimates operational cost."]
+    "frames": [
+      {
+        "id": "m1",
+        "type": "stance",
+        "predicate": {
+          "id": "stance:disagree",
+          "glosses": {
+            "zh-CN": "不同意",
+            "en-US": "disagree"
+          }
+        },
+        "polarity": "negative",
+        "intensity": 0.45,
+        "glosses": {
+          "zh-CN": "说话者不同意该提案。",
+          "en-US": "The speaker disagrees with the proposal."
+        }
+      },
+      {
+        "id": "m2",
+        "type": "claim",
+        "predicate": {
+          "id": "claim:underestimates_operational_cost",
+          "glosses": {
+            "zh-CN": "低估运营成本",
+            "en-US": "underestimates operational cost"
+          }
+        },
+        "polarity": "neutral",
+        "glosses": {
+          "zh-CN": "该提案低估了运营成本。",
+          "en-US": "The proposal underestimates operational cost."
+        }
+      }
+    ],
+    "glosses": {
+      "zh-CN": "说话者认为该提案低估了运营成本，因此不同意该提案。",
+      "en-US": "The speaker disagrees with a proposal due to underestimated operational cost."
+    }
   },
   "affect": {
-    "emotion": ["concern"],
+    "labels": [
+      {
+        "id": "affect:concern",
+        "glosses": {
+          "zh-CN": "担忧",
+          "en-US": "concern"
+        }
+      }
+    ],
     "intensity": 0.35
   },
   "style": {
-    "register": "professional",
-    "tone": "respectful",
+    "register": {
+      "id": "register:professional",
+      "glosses": {
+        "zh-CN": "职场/专业",
+        "en-US": "professional"
+      }
+    },
+    "tone": {
+      "id": "tone:respectful",
+      "glosses": {
+        "zh-CN": "尊重",
+        "en-US": "respectful"
+      }
+    },
     "formality": 0.75
   },
   "privacy": {
     "source_language_markers": [],
     "sensitive_markers": [],
-    "recommended_transform": "preserve_author_style"
+    "recommended_transform": {
+      "id": "transform:preserve_author_style",
+      "glosses": {
+        "zh-CN": "保留作者风格",
+        "en-US": "preserve author style"
+      }
+    }
   },
   "targets": [
     {
       "language": "zh-CN",
-      "audience": "professional readers",
-      "style": "concise business Chinese",
+      "audience": {
+        "zh-CN": "职场读者",
+        "en-US": "professional readers"
+      },
+      "style": {
+        "id": "style:concise_business",
+        "glosses": {
+          "zh-CN": "简洁商务表达",
+          "en-US": "concise business expression"
+        }
+      },
       "preserve_source_markers": true
     }
   ]

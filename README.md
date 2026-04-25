@@ -22,6 +22,7 @@ LLM-IR proposes a different path:
 - separate facts from tone, style, intent, and cultural markers
 - allow privacy transforms before target-language generation
 - provide a common protocol for LLMs, apps, and social platforms
+- avoid treating English as the hidden intermediate language
 
 ## Design Analogy
 
@@ -73,21 +74,54 @@ LLM-IR:
 ```json
 {
   "schema": "llm-ir.v0",
-  "intent": "express_reaction",
+  "source": {
+    "text": "这事儿也太离谱了吧，真绷不住了。",
+    "language": "zh-CN"
+  },
+  "intent": {
+    "id": "act:express_reaction",
+    "glosses": {
+      "zh-CN": "表达强烈反应",
+      "en-US": "express a strong reaction"
+    }
+  },
   "meaning": {
-    "summary": "The speaker strongly feels that the situation is absurd."
+    "frames": [
+      {
+        "id": "m1",
+        "type": "evaluation",
+        "predicate": {
+          "id": "eval:absurd",
+          "glosses": {
+            "zh-CN": "离谱/荒谬",
+            "en-US": "absurd"
+          }
+        },
+        "glosses": {
+          "zh-CN": "说话者强烈觉得这件事很离谱。",
+          "en-US": "The speaker strongly feels that the situation is absurd."
+        }
+      }
+    ]
   },
   "affect": {
-    "emotion": ["disbelief", "frustration"],
+    "labels": [
+      {
+        "id": "affect:disbelief",
+        "glosses": {
+          "zh-CN": "难以置信",
+          "en-US": "disbelief"
+        }
+      },
+      {
+        "id": "affect:frustration",
+        "glosses": {
+          "zh-CN": "无语/受不了",
+          "en-US": "frustration"
+        }
+      }
+    ],
     "intensity": 0.85
-  },
-  "style": {
-    "register": "casual",
-    "tone": "internet_slang"
-  },
-  "privacy": {
-    "source_language_markers": ["Chinese internet slang"],
-    "recommended_transform": "neutralize_source_language_markers"
   }
 }
 ```
